@@ -1,5 +1,5 @@
 ---
-import Counter from '../components/Counter'
+import WordlePreact from '../components/WordlePreact'
 ---
 
 <html lang="en">
@@ -10,10 +10,11 @@ import Counter from '../components/Counter'
 	<title>Astro</title>
 </head>
 
-<body class="bg-slate-800 text-slate-200">
-	<Counter client:visible>
-		<h1>Hello, Preact!</h1>
-	</Counter>
+<body class="bg-slate-800 text-slate-200 max-w-6xl mx-auto">
+	<section class="h-screen py-16">
+		<h2 class="text-center text-4xl mb-8">Wordle with Preact</h2>
+		<WordlePreact client:visible />
+	</section>
 </body>
 
 </html>
