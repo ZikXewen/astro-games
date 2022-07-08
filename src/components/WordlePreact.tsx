@@ -60,6 +60,7 @@ const Wordle = () => {
     }
   }
   const handleRestart = () => {
+    setColors(new Map())
     setAnswer(words.at(Math.floor(Math.random() * words.length)))
     setGuesses([])
     setWin(false)
