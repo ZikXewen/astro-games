@@ -1,3 +1,4 @@
+import { Component } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
 import { JSXInternal } from 'preact/src/jsx'
 
@@ -9,13 +10,14 @@ interface Character {
 }
 
 const Wordle = () => {
+  const [colors, setColors] = useState<Map<string, Color>>(new Map())
   const [words, setWords] = useState<string[]>([])
   const [answer, setAnswer] = useState<string>('')
   const [error, setError] = useState<boolean>(false)
   const [guess, setGuess] = useState<string>('')
   const [guesses, setGuesses] = useState<Character[][]>([])
   const [win, setWin] = useState<boolean>(false)
-  const submitHandler = () => {
+  const handleSubmit = (guess: string) => {
     if (!words.includes(guess)) return
     const letters = {}
     for (const c of answer) letters[c] = (letters[c] || 0) + 1
@@ -35,14 +37,19 @@ const Wordle = () => {
     })
     setGuesses((guesses) => [...guesses, newGuess])
     setGuess('')
+    setColors((colors) => {
+      for (const { char, color } of newGuess)
+        if (colors.get(char) !== 'green') colors.set(char, color)
+      return colors
+    })
     if (correct === 5) setWin(true)
   }
-  const keyupHandler: JSXInternal.KeyboardEventHandler<Window> = ({ key }) => {
+  const handleKeyup = ({ key }: { key: string }) => {
     if (win) return
     key = key.toLocaleUpperCase()
     switch (key) {
       case 'ENTER':
-        if (guess.length === 5) submitHandler()
+        if (guess.length === 5) handleSubmit(guess)
         break
       case 'BACKSPACE':
         if (guess.length > 0) setGuess((guess) => guess.slice(0, -1))
@@ -52,7 +59,14 @@ const Wordle = () => {
           setGuess((guess) => guess + key)
     }
   }
-  const fetchWord = () => {
+  const handleRestart = () => {
+    setAnswer(words.at(Math.floor(Math.random() * words.length)))
+    setGuesses([])
+    setWin(false)
+  }
+  const handleForfeit = () => handleSubmit(answer)
+
+  useEffect(() => {
     fetch('wordbank.txt')
       .then((res) => res.text())
       .then((text) => {
@@ -65,14 +79,11 @@ const Wordle = () => {
         console.error(err)
         setError(true)
       })
-  }
-  useEffect(() => {
-    fetchWord()
   }, [])
   useEffect(() => {
-    document.addEventListener('keyup', keyupHandler)
-    return () => document.removeEventListener('keyup', keyupHandler)
-  })
+    document.addEventListener('keyup', handleKeyup)
+    return () => document.removeEventListener('keyup', handleKeyup)
+  }, [handleKeyup])
 
   if (error)
     return (
@@ -97,11 +108,7 @@ const Wordle = () => {
       {win ? (
         <button
           class="h-12 w-[17rem] bg-gray-500 hover:bg-slate-600 transition-colors duration-100"
-          onClick={() => {
-            fetchWord()
-            setGuesses([])
-            setWin(false)
-          }}
+          onClick={handleRestart}
         >
           Restart
         </button>
@@ -118,19 +125,40 @@ const Wordle = () => {
           </div>
           <button
             class="h-12 w-[17rem] bg-gray-500 hover:bg-slate-600 transition-colors duration-100"
-            onClick={() => {
-              setGuess('')
-              setGuesses((guesses) => [
-                ...guesses,
-                answer.split('').map((char) => ({ char, color: 'green' })),
-              ])
-              setWin(true)
-            }}
+            onClick={handleForfeit}
           >
             Answer
           </button>
         </>
       )}
+      <div class="flex gap-1 absolute bottom-16 mx-12 flex-wrap justify-center">
+        {[...Array(26)].map((_, i) => {
+          const char = String.fromCharCode(65 + i)
+          const color = colors.get(char)
+          return (
+            <button
+              class={`h-10 w-10 ${
+                color && `bg-${color}-500`
+              } text-center leading-10 text-xl`}
+              onClick={() => handleKeyup({ key: char })}
+            >
+              {char}
+            </button>
+          )
+        })}
+        <button
+          class="h-10 w-10 bg-gray-500 text-center leading-10 text-xl"
+          onClick={() => handleKeyup({ key: 'ENTER' })}
+        >
+          ⏎
+        </button>
+        <button
+          class="h-10 w-10 bg-gray-500 text-center leading-10 text-lg"
+          onClick={() => handleKeyup({ key: 'BACKSPACE' })}
+        >
+          ⌫
+        </button>
+      </div>
     </div>
   )
 }
