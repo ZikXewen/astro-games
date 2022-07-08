@@ -2,7 +2,7 @@ import { Component } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
 import { JSXInternal } from 'preact/src/jsx'
 
-type Color = 'green' | 'yellow' | 'gray'
+type Color = 'green' | 'yellow' | 'slate'
 
 interface Character {
   char: string
@@ -27,10 +27,10 @@ const Wordle = () => {
         letters[char]--
         correct++
         return { char, color: 'green' }
-      } else return { char, color: 'gray' }
+      } else return { char, color: 'slate' }
     })
     newGuess = newGuess.map(({ char, color }) => {
-      if (color === 'gray' && letters[char] > 0) {
+      if (color === 'slate' && letters[char] > 0) {
         letters[char]--
         return { char, color: 'yellow' }
       } else return { char, color }
@@ -107,7 +107,7 @@ const Wordle = () => {
       ))}
       {win ? (
         <button
-          class="h-12 w-[17rem] bg-gray-500 hover:bg-slate-600 transition-colors duration-100"
+          class="h-12 w-[17rem] bg-slate-500 hover:bg-slate-600 transition-colors duration-100"
           onClick={handleRestart}
         >
           Restart
@@ -117,14 +117,14 @@ const Wordle = () => {
           <div class="flex gap-2">
             {[...Array(5)].map((c, i) => (
               <div
-                class={`h-12 w-12 bg-gray-500 text-center leading-[3rem] text-xl font-semibold`}
+                class={`h-12 w-12 bg-slate-500 text-center leading-[3rem] text-xl font-semibold`}
               >
                 {guess[i] || ' '}
               </div>
             ))}
           </div>
           <button
-            class="h-12 w-[17rem] bg-gray-500 hover:bg-slate-600 transition-colors duration-100"
+            class="h-12 w-[17rem] bg-slate-500 hover:bg-slate-600 transition-colors duration-100"
             onClick={handleForfeit}
           >
             Answer
@@ -147,13 +147,13 @@ const Wordle = () => {
           )
         })}
         <button
-          class="h-10 w-10 bg-gray-500 text-center leading-10 text-xl"
+          class="h-10 w-10 bg-slate-500 text-center leading-10 text-xl"
           onClick={() => handleKeyup({ key: 'ENTER' })}
         >
           ⏎
         </button>
         <button
-          class="h-10 w-10 bg-gray-500 text-center leading-10 text-lg"
+          class="h-10 w-10 bg-slate-500 text-center leading-10 text-lg"
           onClick={() => handleKeyup({ key: 'BACKSPACE' })}
         >
           ⌫
