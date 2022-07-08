@@ -52,7 +52,7 @@ const Wordle = () => {
           setGuess((guess) => guess + key)
     }
   }
-  useEffect(() => {
+  const fetchWord = () => {
     fetch('wordbank.txt')
       .then((res) => res.text())
       .then((text) => {
@@ -65,36 +65,72 @@ const Wordle = () => {
         console.error(err)
         setError(true)
       })
+  }
+  useEffect(() => {
+    fetchWord()
   }, [])
   useEffect(() => {
     document.addEventListener('keyup', keyupHandler)
     return () => document.removeEventListener('keyup', keyupHandler)
   })
 
-  if (error) return <h3 class="text-xl text-red-600">Failed to fetch word</h3>
-  if (!answer) return <h3 class="text-xl">Fetching a random word...</h3>
+  if (error)
+    return (
+      <h3 class="text-xl text-red-600 text-center">Failed to fetch word</h3>
+    )
+
+  if (!answer)
+    return <h3 class="text-xl text-center">Fetching a random word...</h3>
   return (
     <div class="flex flex-col items-center gap-2">
-      {(win
-        ? guesses
-        : [
-            ...guesses,
-            [...Array(5)].map((_, i) => ({
-              char: guess[i] || ' ',
-              color: 'gray',
-            })),
-          ]
-      ).map((guess) => (
+      {guesses.map((guess) => (
         <div class="flex gap-2">
           {guess.map((c) => (
             <div
-              class={`h-12 w-12 bg-${c.color}-400 text-center leading-[3rem] text-xl font-semibold`}
+              class={`h-12 w-12 bg-${c.color}-500 text-center leading-[3rem] text-xl font-semibold`}
             >
               {c.char}
             </div>
           ))}
         </div>
       ))}
+      {win ? (
+        <button
+          class="h-12 w-[17rem] bg-gray-500 hover:bg-slate-600 transition-colors duration-100"
+          onClick={() => {
+            fetchWord()
+            setGuesses([])
+            setWin(false)
+          }}
+        >
+          Restart
+        </button>
+      ) : (
+        <>
+          <div class="flex gap-2">
+            {[...Array(5)].map((c, i) => (
+              <div
+                class={`h-12 w-12 bg-gray-500 text-center leading-[3rem] text-xl font-semibold`}
+              >
+                {guess[i] || ' '}
+              </div>
+            ))}
+          </div>
+          <button
+            class="h-12 w-[17rem] bg-gray-500 hover:bg-slate-600 transition-colors duration-100"
+            onClick={() => {
+              setGuess('')
+              setGuesses((guesses) => [
+                ...guesses,
+                answer.split('').map((char) => ({ char, color: 'green' })),
+              ])
+              setWin(true)
+            }}
+          >
+            Answer
+          </button>
+        </>
+      )}
     </div>
   )
 }
