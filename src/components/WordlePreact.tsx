@@ -94,45 +94,47 @@ const Wordle = () => {
   if (!answer)
     return <h3 class="text-xl text-center">Fetching a random word...</h3>
   return (
-    <div class="flex flex-col items-center gap-2">
-      {guesses.map((guess) => (
-        <div class="flex gap-2">
-          {guess.map((c) => (
-            <div
-              class={`h-12 w-12 bg-${c.color}-500 text-center leading-[3rem] text-xl font-semibold`}
-            >
-              {c.char}
-            </div>
-          ))}
-        </div>
-      ))}
-      {win ? (
-        <button
-          class="h-12 w-[17rem] bg-slate-500 hover:bg-slate-600 transition-colors duration-100"
-          onClick={handleRestart}
-        >
-          Restart
-        </button>
-      ) : (
-        <>
+    <>
+      <div class="flex flex-col items-center justify-center gap-2 flex-1 my-16">
+        {guesses.map((guess) => (
           <div class="flex gap-2">
-            {[...Array(5)].map((c, i) => (
+            {guess.map((c) => (
               <div
-                class={`h-12 w-12 bg-slate-500 text-center leading-[3rem] text-xl font-semibold`}
+                class={`h-12 w-12 bg-${c.color}-500 text-center leading-[3rem] text-xl font-semibold`}
               >
-                {guess[i] || ' '}
+                {c.char}
               </div>
             ))}
           </div>
+        ))}
+        {win ? (
           <button
             class="h-12 w-[17rem] bg-slate-500 hover:bg-slate-600 transition-colors duration-100"
-            onClick={handleForfeit}
+            onClick={handleRestart}
           >
-            Answer
+            Restart
           </button>
-        </>
-      )}
-      <div class="flex gap-1 absolute bottom-16 mx-12 flex-wrap justify-center">
+        ) : (
+          <>
+            <div class="flex gap-2">
+              {[...Array(5)].map((c, i) => (
+                <div
+                  class={`h-12 w-12 bg-slate-500 text-center leading-[3rem] text-xl font-semibold`}
+                >
+                  {guess[i] || ' '}
+                </div>
+              ))}
+            </div>
+            <button
+              class="h-12 w-[17rem] bg-slate-500 hover:bg-slate-600 transition-colors duration-100"
+              onClick={handleForfeit}
+            >
+              Answer
+            </button>
+          </>
+        )}
+      </div>
+      <div class="flex gap-1 mx-12 flex-wrap justify-center">
         {[...Array(26)].map((_, i) => {
           const char = String.fromCharCode(65 + i)
           const color = colors.get(char)
@@ -160,7 +162,7 @@ const Wordle = () => {
           ⌫
         </button>
       </div>
-    </div>
+    </>
   )
 }
 
