@@ -88,11 +88,13 @@ const Wordle = () => {
 
   if (error)
     return (
-      <h3 class="text-xl text-red-600 text-center">Failed to fetch word</h3>
+      <h3 class="text-xl text-red-600 text-center mt-16">
+        Failed to fetch word
+      </h3>
     )
 
   if (!answer)
-    return <h3 class="text-xl text-center">Fetching a random word...</h3>
+    return <h3 class="text-xl text-center mt-16">Fetching a random word...</h3>
   return (
     <>
       <div class="flex flex-col items-center justify-center gap-2 flex-1 my-16">
