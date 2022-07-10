@@ -10,11 +10,15 @@ import WordlePreact from '../components/WordlePreact'
 	<title>Wordle with Preact</title>
 </head>
 
-<body class="bg-slate-800 text-slate-200 max-w-6xl mx-auto">
-	<section class="h-screen py-16 relative">
+<body class="bg-slate-800 text-slate-200">
+	<section class="max-w-6xl mx-auto h-screen py-16 relative">
 		<h2 class="text-center text-4xl mb-8">Wordle with Preact</h2>
 		<WordlePreact client:visible />
 	</section>
+	<footer class="h-16 leading-[4rem] text-center bg-slate-900">
+		Source code can be found
+		<a href="https://github.com/ZikXewen/astro-wordle" class="underline">here</a>.
+	</footer>
 </body>
 
 </html>
