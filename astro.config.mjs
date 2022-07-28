@@ -6,5 +6,5 @@ import wasm from 'vite-plugin-wasm'
 // https://astro.build/config
 export default defineConfig({
   integrations: [preact(), tailwind()],
-  vite: { plugins: [wasm()] },
+  vite: { plugins: [wasm()], optimizeDeps: { exclude: ['mswp'] } },
 })

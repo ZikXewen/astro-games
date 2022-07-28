@@ -5,6 +5,7 @@ specifiers:
   '@astrojs/tailwind': ^0.2.5
   astro: 1.0.0-rc.1
   grapheme-splitter: ^1.0.4
+  mswp: ^0.1.0
   preact: ^10.10.0
   vite-plugin-wasm: ^2.1.0
 
@@ -13,6 +14,7 @@ devDependencies:
   '@astrojs/tailwind': 0.2.5
   astro: 1.0.0-rc.1
   grapheme-splitter: 1.0.4
+  mswp: 0.1.0
   preact: 10.10.0
   vite-plugin-wasm: 2.1.0
 
@@ -2622,6 +2624,10 @@ packages:
 
   /ms/2.1.2:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
+    dev: true
+
+  /mswp/0.1.0:
+    resolution: {integrity: sha512-Y9aDLs9JJMfECQho3hh+DuPD8WSxJrjN+dlX/SrQPZVv39AoijCxMqklBCw8A3blP013UOAA1OIF+MSBSmZfFA==}
     dev: true
 
   /nanoid/3.3.4:
