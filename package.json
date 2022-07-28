@@ -1,12 +1,13 @@
 {
-  "name": "astro-wordle",
+  "name": "astro-games",
   "version": "0.0.1",
   "private": true,
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "wasm": "wasm-pack build ./src/wasm-lib"
   },
   "devDependencies": {
     "@astrojs/preact": "^0.5.2",
