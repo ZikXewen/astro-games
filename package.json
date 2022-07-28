@@ -9,9 +9,11 @@
     "preview": "astro preview"
   },
   "devDependencies": {
-    "@astrojs/preact": "^0.3.2",
-    "@astrojs/tailwind": "^0.2.3",
-    "astro": "1.0.0-beta.64",
-    "preact": "^10.9.0"
+    "@astrojs/preact": "^0.5.2",
+    "@astrojs/tailwind": "^0.2.5",
+    "astro": "1.0.0-rc.1",
+    "grapheme-splitter": "^1.0.4",
+    "preact": "^10.10.0",
+    "vite-plugin-wasm": "^2.1.0"
   }
 }
