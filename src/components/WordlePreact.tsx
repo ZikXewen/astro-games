@@ -1,6 +1,4 @@
-import { Component } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
-import { JSXInternal } from 'preact/src/jsx'
 
 type Color = 'green' | 'yellow' | 'slate'
 
