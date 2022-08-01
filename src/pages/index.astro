@@ -2,6 +2,7 @@
 import WasmMinesweeper from '../components/WasmMinesweeper.astro';
 import WordlePreact from '../components/WordlePreact'
 import TicTacToe from '../components/TicTacToe.svelte'
+import Game from '../components/Game.astro'
 ---
 
 <html lang="en">
@@ -13,18 +14,15 @@ import TicTacToe from '../components/TicTacToe.svelte'
 </head>
 
 <body class="bg-slate-800 text-slate-200">
-	<section class="min-h-screen py-16 flex flex-col justify-center text-center">
-		<h2 class="text-4xl">Minesweeper with Rust WASM + Vanilla Typescript</h2>
+	<Game title="Minesweeper" techs={['rust', 'wasm' , 'ts' , 'tw' ]}>
 		<WasmMinesweeper />
-	</section>
-	<section class="max-w-6xl mx-auto min-h-screen py-16 flex flex-col">
-		<h2 class="text-center text-4xl">Wordle with Preact</h2>
+	</Game>
+	<Game title="Wordle" techs={['preact', 'ts' , 'tw' ]}>
 		<WordlePreact client:visible />
-	</section>
-	<section class="min-h-screen py-16 flex flex-col justify-center text-center">
-		<h2 class="text-4xl">Tic-Tac-Toe with Svelte</h2>
+	</Game>
+	<Game title="Tic-Tac-Toe" techs={['svelte', 'tw' ]}>
 		<TicTacToe client:visible />
-	</section>
+	</Game>
 	<footer class="h-16 leading-[4rem] text-center bg-slate-900">
 		Source code can be found
 		<a href="https://github.com/ZikXewen/astro-games" class="underline">here</a>.
