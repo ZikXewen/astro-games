@@ -10,11 +10,13 @@
   },
   "devDependencies": {
     "@astrojs/preact": "^0.5.2",
+    "@astrojs/svelte": "^0.5.1",
     "@astrojs/tailwind": "^0.2.5",
-    "astro": "1.0.0-rc.1",
+    "astro": "1.0.0-rc.3",
     "grapheme-splitter": "^1.0.4",
     "mswp": "^0.1.0",
     "preact": "^10.10.0",
+    "svelte": "^3.46.4",
     "vite-plugin-wasm": "^2.1.0"
   }
 }
