@@ -16,6 +16,8 @@
     "grapheme-splitter": "^1.0.4",
     "mswp": "^0.1.0",
     "preact": "^10.10.0",
+    "prettier": "^2.7.1",
+    "prettier-plugin-astro": "^0.2.0",
     "svelte": "^3.46.4",
     "vite-plugin-wasm": "^2.1.0"
   }
