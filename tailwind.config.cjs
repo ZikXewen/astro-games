@@ -13,5 +13,10 @@ module.exports = {
     },
   },
   plugins: [],
-  safelist: ['bg-green-500', 'bg-yellow-500'],
+  safelist: [
+    'bg-green-500',
+    'bg-yellow-500',
+    "after:content-['✕']",
+    "after:content-['O']",
+  ],
 }
