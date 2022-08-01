@@ -1,17 +1,23 @@
 ---
-
 ---
 
-<div id="display" class="flex-1 my-16 font-emoji flex flex-col justify-center"></div>
+<div id="display" class="flex-1 my-16 font-emoji flex flex-col justify-center">
+</div>
 <div class="flex items-center justify-center gap-2">
-  <button id="btn-easy" class="w-32 py-2 bg-slate-500 rounded-full">Restart Easy</button>
-  <button id="btn-medium" class="w-32 py-2 bg-slate-500 rounded-full">Restart Medium</button>
-  <button id="btn-hard" class="w-32 py-2 bg-slate-500 rounded-full">Restart Hard</button>
+  <button id="btn-easy" class="w-32 py-2 bg-slate-500 rounded-full"
+    >Restart Easy
+  </button>
+  <button id="btn-medium" class="w-32 py-2 bg-slate-500 rounded-full"
+    >Restart Medium
+  </button>
+  <button id="btn-hard" class="w-32 py-2 bg-slate-500 rounded-full"
+    >Restart Hard
+  </button>
 </div>
 
 <style is:global>
   [with-char]::after {
-    content: attr(with-char)
+    content: attr(with-char);
   }
 </style>
 
@@ -39,10 +45,7 @@
           cellEl.style.width = '1.5rem'
           cellEl.style.display = 'inline-block'
           cellEl.setAttribute('with-char', char)
-          if (
-            !ended &&
-            (char === '⬛' || char === '🏳️')
-          ) {
+          if (!ended && (char === '⬛' || char === '🏳️')) {
             cellEl.style.cursor = 'pointer'
             cellEl.addEventListener('click', (e) => {
               e.preventDefault()

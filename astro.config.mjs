@@ -1,9 +1,9 @@
-import { defineConfig } from 'astro/config';
-import preact from '@astrojs/preact';
-import tailwind from '@astrojs/tailwind';
-import wasm from 'vite-plugin-wasm';
+import { defineConfig } from 'astro/config'
+import preact from '@astrojs/preact'
+import tailwind from '@astrojs/tailwind'
+import wasm from 'vite-plugin-wasm'
 
-import svelte from "@astrojs/svelte";
+import svelte from '@astrojs/svelte'
 
 // https://astro.build/config
 export default defineConfig({
@@ -11,7 +11,7 @@ export default defineConfig({
   vite: {
     plugins: [wasm()],
     optimizeDeps: {
-      exclude: ['mswp']
-    }
-  }
-});
+      exclude: ['mswp'],
+    },
+  },
+})
