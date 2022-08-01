@@ -8,6 +8,13 @@
   <button id="btn-medium" class="w-32 py-2 bg-slate-500 rounded-full">Restart Medium</button>
   <button id="btn-hard" class="w-32 py-2 bg-slate-500 rounded-full">Restart Hard</button>
 </div>
+
+<style is:global>
+  [with-char]::after {
+    content: attr(with-char)
+  }
+</style>
+
 <script>
   import * as wasm from 'mswp'
   import Splitter from 'grapheme-splitter'
@@ -27,13 +34,14 @@
       for (let x = 0; x < data.length; x++) {
         const rowEl = document.createElement('div')
         for (let y = 0; y < (data[x]?.length || 0); y++) {
+          const char = data[x][y]
           const cellEl = document.createElement('span')
           cellEl.style.width = '1.5rem'
           cellEl.style.display = 'inline-block'
-          cellEl.innerText = data[x]?.at(y) || ''
+          cellEl.setAttribute('with-char', char)
           if (
             !ended &&
-            (cellEl.innerText === '⬛' || cellEl.innerText === '🏳️')
+            (char === '⬛' || char === '🏳️')
           ) {
             cellEl.style.cursor = 'pointer'
             cellEl.addEventListener('click', (e) => {
@@ -73,5 +81,4 @@
   })
 
   startGame(8, 10, 30)
-
 </script>
